@@ -12,10 +12,10 @@
 }
 
 :root {
-  --bg-color: #1f242d;
-  --second-bg-color: #323946;
-  --text-color: #fff;
-  --main-color: #0ef;
+  --bg-color: #ADC4CE;
+  --second-bg-color: #96B6C5;
+  --text-color: #F1F0E8;
+  --main-color: #EEE0C9;
 }
 
 html {
@@ -83,7 +83,7 @@ section {
 
 .home-img img {
   width: 35vw;
-  border-radius: 50%;
+  border-radius: 35%;
   /* padding-left: 5rem; */
   animation: floatImage 4s ease-in-out infinite;
 }
@@ -182,12 +182,12 @@ span {
   font-size: 2.6rem;
 }
 .about-content p {
-  font-size: 1.6rem;
-  padding: 2rem 0 3rem;
+  font-size: 2rem;
+  padding: 5rem 0 3rem;
 }
 .about-img img {
   width: 35vw;
-  border-radius: 50%;
+  border-radius: 35%;
   /* padding-left: 5rem; */
 }
 
