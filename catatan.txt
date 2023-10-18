@@ -1,0 +1,23 @@
+Home Section
+ - Nama
+ - deskripsi
+ - foto
+
+About Section
+ - nama
+ - foto
+ - deskripsi
+
+Service Section
+ - judul
+ - deskripsi
+
+latest project section
+ - foto
+ - judul project
+ - deskripsi singkat
+ - link
+
+contact section
+ - emails
+

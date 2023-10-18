@@ -31,10 +31,6 @@ menuIcon.onclick = () => {
 
 // Sticky navbar
 
-
-
-
-
 let header = document.querySelector("header");
 
 
@@ -45,7 +41,7 @@ header.classList.toggle("sticky", window.scrollY > 100);
 menuIcon.classList.remove("bx-x");
 navbar.classList.remove("active");
 
-//scroll reveal
+// //scroll reveal
 ScrollReveal({
   //   reset: true,
   distance: "80px",
