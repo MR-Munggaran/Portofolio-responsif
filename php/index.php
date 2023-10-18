@@ -111,33 +111,39 @@
         <?php } ?>
     </div>
 </section>
-
-    <!-- contact section -->
-    <section class="contact" id="contact">
-    <h2 class="heading">Contact <span>Me!</span></h2>
-
-    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
-        <?php
-
-        list($notify, $notifyClass) = processContactForm($conn); // Panggil fungsi untuk memproses formulir kontak
-        if (!empty($notify)) { ?>
-            <p class="notify <?php echo !empty($notifyClass) ? $notifyClass : ''; ?>"><?php echo $notify; ?></p>
-        <?php } ?>
-
-        <!-- Sisipkan formulir kontak di sini -->
-        <fieldset class="inpit-box">
-          <input placeholder="Nama Anda" type="text" name="name" tabindex="1">
-          <input placeholder="Email Anda" type="text" name="email" tabindex="2" >
-        </fieldset>
-        <fieldset class="inpit-box">
-          <input type="number" placeholder="Mobile Number" name="phone"/>
-          <input type="text" placeholder="Email Subject" name="subject"/>
-        </fieldset>
-        <textarea name="message" id="" cols="30" rows="10" placeholder="Ketikan pesan Anda"></textarea>
-        <button name="submit" type="submit" id="contact-submit" data-submit="...Mengirim pesan" class="btn">Kirim</button>
+<section class="contact" id="contact">
+<h2 class="heading">Contact <span>Me!</span></h2>
+    <form name="contactform" method="post" action="#">
+    <!-- Isi formulir di sini -->
+    <fieldset class="inpit-box">
+      <input type="text" name="name" placeholder="Nama"/>
+      <input type="text" name="email" placeholder="Email"/>
+    </fieldset>
+    <fieldset class="inpit-box">
+      <input type="number" placeholder="Mobile Number" name="phone"/>
+      <input type="text" placeholder="Email Subject" name="subject"/>
+    </fieldset>
+    <!-- Form lainnya -->
+    <textarea id="message" cols="30" rows="10" placeholder="Ketik pesan Anda" name="message"></textarea>
+    <button type="submit" id="contact-submit" class="btn">Kirim</button>
     </form>
+    <?php
+   if ($_SERVER["REQUEST_METHOD"] === "POST") {
+       $name = $_POST['name'];
+       $email = $_POST['email'];
+       $phone = $_POST['phone'];
+       $subject = $_POST['subject'];
+       $message = $_POST['message'];
+   
+       // Periksa apakah $conn telah didefinisikan di tempat lain dalam kode Anda
+       $sql = "INSERT INTO contact (name, email, phone, subject, message) VALUES ('$name', '$email', '$phone', '$subject', '$message')";
+   
+       if ($conn->query($sql) === FALSE) {
+        echo "Terjadi kesalahan: " . $sql . "<br>" . $conn->error;
+       }
+   }
+   ?>
 </section>
-
     <!-- footer -->
     <footer class="footer">
       <div class="footer-text">

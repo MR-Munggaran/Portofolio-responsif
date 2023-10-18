@@ -1,33 +1,31 @@
+document.getElementById("contact-submit").addEventListener("click", function () {
+    var name = document.querySelector('input[name="name"]').value;
+    var email = document.querySelector('input[name="email"]').value;
+    var phone = document.querySelector('input[name="phone"]').value;
+    var subject = document.querySelector('input[name="subject"]').value;
+    var message = document.querySelector('textarea[name="message"]').value;
 
-const form = document.getElementById('contact-form');
-const formResponse = document.getElementById('form-response');
+    var data = new FormData();
+    data.append('name', name);
+    data.append('email', email);
+    data.append('phone', phone);
+    data.append('subject', subject);
+    data.append('message', message);
 
-form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value;
-
-    // Data formulir
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('subject', subject);
-    formData.append('message', message);
-
-    fetch('../php/API/contact.php', {
-        method: 'POST',
-        body: formData
+    fetch("api.php", {
+        method: "POST",
+        body: data,
     })
     .then(response => response.json())
-    .then(responseData => {
-        formResponse.innerHTML = responseData.notify;
-        formResponse.className = responseData.notifyClass;
+    .then(data => {
+        if (data.error) {
+            alert("Error: " + data.error);
+        } else if (data.success) {
+            alert(data.success);
+        }
     })
     .catch(error => {
-        console.error(error);
+        console.error("Request error: " + error);
     });
 });
 

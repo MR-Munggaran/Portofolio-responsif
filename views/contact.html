@@ -29,18 +29,19 @@
         <!-- contact section -->
         <section class="contact" id="contact">
           <h2 class="heading">Contact <span>Me!</span></h2>
-          <form id="contact-form">
-              <div id="form-response"></div>
-              <div class="inpit-box">
-                  <input placeholder="Nama Anda" type="text" id="name" tabindex="1">
-                  <input placeholder="Email Anda" type="text" id="email" tabindex="2">
-              </div>
-              <div class="inpit-box">
-                  <input type="number" placeholder="Mobile Number" id="phone">
-                  <input type="text" placeholder="Email Subject" id="subject">
-              </div>
-              <textarea id="message" cols="30" rows="10" placeholder="Ketik pesan Anda"></textarea>
-              <button type="submit" id="contact-submit" class="btn">Kirim</button>
+          <form name="contactform" method="post" action="#">
+              <!-- Isi formulir di sini -->
+              <fieldset class="inpit-box">
+                  <input type="text" name="name" placeholder="Nama"/>
+                  <input type="text" name="email" placeholder="Email"/>
+              </fieldset>
+              <fieldset class="inpit-box">
+                  <input type="number" placeholder="Mobile Number" name="phone"/>
+                  <input type="text" placeholder="Email Subject" name="subject"/>
+              </fieldset>
+              <!-- Form lainnya -->
+              <textarea id="message" cols="30" rows="10" placeholder="Ketik pesan Anda" name="message"></textarea>
+              <button type="button" id="contact-submit" class="btn">Kirim</button>
           </form>
       </section>
 
@@ -59,9 +60,56 @@
   
       <!-- typed.js -->
       <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-      <script src="../js/contact.js"></script>
-
+      <!-- <script src="../js/contact.js"></script> -->
+      <script>
+        document.getElementById("contact-submit").addEventListener("click", function () {
+            const name = document.querySelector('input[name="name"]').value;
+            const email = document.querySelector('input[name="email"]').value;
+            const phone = document.querySelector('input[name="phone"]').value;
+            const subject = document.querySelector('input[name="subject"]').value;
+            const message = document.querySelector('textarea[name="message"]').value;
     
+            const data = new FormData();
+            data.append('name', name);
+            data.append('email', email);
+            data.append('phone', phone);
+            data.append('subject', subject);
+            data.append('message', message);
+    
+            fetch("../php/API/contact.php", {
+                method: "POST",
+                body: data,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert("Error: " + data.error);
+                } else {
+                    alert(data.message);
+                    window.location.href = "contact.html";
+                }
+            })
+            .catch(error => {
+                console.error("Request error: " + error);
+            });
+        });
 
+        // //scroll reveal
+ScrollReveal({
+    //   reset: true,
+    distance: "80px",
+    duration: 2000,
+    delay: 200,
+  });
+  
+  ScrollReveal().reveal(".home-content, .heading", { origin: "top" });
+  ScrollReveal().reveal(
+    ".home-img, .services-container, .portofolio-box, .contact form",
+    { origin: "bottom" }
+  );
+  ScrollReveal().reveal(".home-content h1, .about-img", { origin: "left" });
+  ScrollReveal().reveal(".home-content p, .about-content", { origin: "right" });
+    </script>
+    
 </body>
 </html>
